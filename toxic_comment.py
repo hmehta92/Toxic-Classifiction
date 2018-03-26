@@ -15,20 +15,6 @@ train=pd.read_csv("../input/train.csv")
 test=pd.read_csv("../inputtest.csv")
 train=train.drop(["id"],axis=1)
 test=test.drop(["id"],axis=1)
-# define function for checking comment_text
-def check(data):
-    text=data["comment_text"].values
-    single_character=[]
-    index=[]
-    for i,n in enumerate(text):
-        if len(n)<=6:
-            single_character.append(n)
-            index.append(i)
-    return single_character,index       
-
-train=train[~train["comment_text"].isin(check(train)[0])]
-
-test[test["comment_text"].isin(check(test)[0])]="unknown"
 def tokenize(text):
     """
     sent_tokenize(): segment text into sentences
